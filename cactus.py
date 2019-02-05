@@ -1,6 +1,7 @@
 import pygame, sys, time, random
 from pygame.locals import *
 
+#comment added for repository
 #Image for cactus sprite
 CACTUS = pygame.image.load('resources/cactus.png')
 
