@@ -13,13 +13,15 @@ fpsClock = pygame.time.Clock()
 
 DISPLAYSURF = pygame.display.set_mode((400,300), 0, 32)
 #Sets title of GUI frame
-pygame.display.set_caption("Dino Jump")
+pygame.display.set_caption("Lapras Jump")
 
 #Sets background color
 WHITE = (250, 250, 250)
 
 #Adds a new cactus sprite to the list of obstacles
+enemy = pygame.sprite.Group()
 def add_cacti():
+    enemy.add(CACTUS)
 
 #Updates each cactus sprite's location
 #Removes the cactus from sprite group if it's off screen
@@ -53,6 +55,11 @@ def is_collision():
 #This is a placeholder for a challenge exercise.
 def increase_FPS():
 
+    FPS += 5
+
+LAPRAS = trex(150)
+CACTUS = cactus(150)
+
 #Main game loop
 while True:
     #Fill in background
@@ -60,6 +67,15 @@ while True:
 
     #Event loop
     for event in pygame.event.get():
+
+        if event.key == KEYDOWN:
+            if event.key == K_SPACE:
+                LAPRAS.up()
+
+        elif event.key == KEYUP:
+            if event.key == K_SPACE:
+                LAPRAS.down()
+
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
