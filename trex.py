@@ -15,28 +15,24 @@ class trex(pygame.sprite.Sprite):
         self_x = 25
         self_y = ground
         self.image = LAPRAS
-        self.rect = pygame.RECT(self_x, self_y, 35, 25)
+        self.rect = pygame.Rect(self_x, self_y, 192, 192)
 
     #Change the trex's vertical position to above the ground
     def up(self):
-        for x in range(5):
-            self.rect.y -= 10
-            time.sleep(0.1)
+        self.rect.y -= 150
 
     #Change the trex's vertical position gradually to fall down to the ground
     def down(self):
-        for x in range(5):
-            self.rect.y += 10
-            time.sleep(0.1)
+        self.rect.y += 150
 
     #Change the trex's position based on updates from the game.
     #How do you know if the trex should be falling, going up, or stationary?
-    def move(self):
-        
+    #def move(self):
+
 
     #Update the trex's game status with regards to movement
     # and later animation (challenge)
-    def update(self):
+    #def update(self):
 
 
     #Select which frame to display for your sprite

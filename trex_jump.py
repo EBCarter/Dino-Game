@@ -4,14 +4,17 @@ from pygame.locals import *
 from trex import trex
 from cactus import cactus
 
+#i added this for the lapras Image
+lapras_image = pygame.image.load('lapras-pixilart.png')
+
 #Always call before utilizing pygame functions
 pygame.init()
 
 #Sets FPS and starts game clock/
-FPS = 10
+FPS = 60
 fpsClock = pygame.time.Clock()
 
-DISPLAYSURF = pygame.display.set_mode((400,300), 0, 32)
+DISPLAYSURF = pygame.display.set_mode((1000,500), 0, 32)
 #Sets title of GUI frame
 pygame.display.set_caption("Lapras Jump")
 
@@ -27,52 +30,58 @@ def add_cacti():
 #Removes the cactus from sprite group if it's off screen
 #Scores removed cacti
 #Redraws cactus image
-def update_cacti():
+#def update_cacti():
+    #cactus.update()
 
 #Updates trex sprite's location and redraws trex image
-def update_rex():
+#def update_rex():
 
 #Starts game over actions
 #Displays an end of game message in a text box
 #Kills trex sprite
 #Creates new game loop to display end game state
-def game_over():
+#def game_over():
 
 #Creates a text box with the text provided in location x, y on screen
-def display_message(text, x, y):
+#def display_message(text, x, y):
 
 #Displays current score in a text box
-def display_score():
+#def display_score():
 
 #Displays current time in a text box
-def display_time():
+#def display_time():
 
 #Determines whether the trex sprite collides with a cacti sprite
 #If there is a collision, the game is over.
-def is_collision():
+#def is_collision():
 
 #Increases the FPS by 5 every 100 seconds
 #This is a placeholder for a challenge exercise.
-def increase_FPS():
+#def increase_FPS():
 
-    FPS += 5
+    #FPS += 5
 
-LAPRAS = trex(150)
-CACTUS = cactus(150)
+LAPRAS = trex(300)
+CACTUS = cactus(300)
 
 #Main game loop
 while True:
     #Fill in background
     DISPLAYSURF.fill(WHITE)
 
+    lapras_character = LAPRAS.image
+    lapras_rect = LAPRAS.rect
+    lapras_character = pygame.transform.scale(lapras_character,(192, 192))
+    DISPLAYSURF.blit(lapras_character, lapras_rect)
+
     #Event loop
     for event in pygame.event.get():
 
-        if event.key == KEYDOWN:
+        if event.type == KEYDOWN:
             if event.key == K_SPACE:
                 LAPRAS.up()
 
-        elif event.key == KEYUP:
+        elif event.type == KEYUP:
             if event.key == K_SPACE:
                 LAPRAS.down()
 
