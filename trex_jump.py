@@ -62,7 +62,7 @@ def add_cacti():
     #FPS += 5
 
 LAPRAS = trex(300)
-CACTUS = cactus(300)
+CACTUS = cactus(250)
 
 #Main game loop
 while True:
@@ -71,8 +71,12 @@ while True:
 
     lapras_character = LAPRAS.image
     lapras_rect = LAPRAS.rect
+    cactus_character = CACTUS.image
+    cactus_rect = CACTUS.rect
     lapras_character = pygame.transform.scale(lapras_character,(192, 192))
+    cactus_character = pygame.transform.scale(cactus_character,(300, 300))
     DISPLAYSURF.blit(lapras_character, lapras_rect)
+    DISPLAYSURF.blit(cactus_character, cactus_rect)
 
     #Event loop
     for event in pygame.event.get():
@@ -88,6 +92,13 @@ while True:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+
+    #Add cacti for lapras to jump over and spawn them
+    add_cacti()
+    cactus.move(CACTUS)
+    cactus.update(CACTUS)
+    for x in range(len(enemy)):
+        DISPLAYSURF.blit(cactus_character, cactus_rect)
 
     #Update display
     pygame.display.update()
