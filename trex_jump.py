@@ -30,8 +30,11 @@ def add_cacti():
 #Removes the cactus from sprite group if it's off screen
 #Scores removed cacti
 #Redraws cactus image
-#def update_cacti():
-    #cactus.update()
+def update_cacti():
+    if cactus.update(CACTUS) == "dead":
+        add_cacti()
+    DISPLAYSURF.blit(cactus_character, (850, 250))
+    #cactus.move(CACTUS)
 
 #Updates trex sprite's location and redraws trex image
 #def update_rex():
@@ -94,11 +97,12 @@ while True:
             sys.exit()
 
     #Add cacti for lapras to jump over and spawn them
-    add_cacti()
-    cactus.move(CACTUS)
-    cactus.update(CACTUS)
-    for x in range(len(enemy)):
-        DISPLAYSURF.blit(cactus_character, cactus_rect)
+    #add_cacti()
+    #DISPLAYSURF.blit(cactus_character, cactus_rect)
+    #cactus.move(CACTUS)
+    update_cacti()
+    #for x in range(len(enemy)):
+        #DISPLAYSURF.blit(cactus_character, cactus_rect)
 
     #Update display
     pygame.display.update()

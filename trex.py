@@ -27,8 +27,14 @@ class trex(pygame.sprite.Sprite):
 
     #Change the trex's position based on updates from the game.
     #How do you know if the trex should be falling, going up, or stationary?
-    #def move(self):
-
+    def move(self):
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_SPACE:
+                    trex.up()
+            elif event.type == KEYUP:
+                if event.key == K_SPACE:
+                    trex.down()
 
     #Update the trex's game status with regards to movement
     # and later animation (challenge)

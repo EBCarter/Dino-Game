@@ -29,5 +29,6 @@ class cactus(pygame.sprite.Sprite):
     def update(self):
         if self.rect.x <= -150:
             self.kill()
-        if self.rect.x >= -149:
+            return "dead"
+        elif self.rect.x >= -149:
             self.move()
