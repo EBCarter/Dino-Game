@@ -32,9 +32,9 @@ class trex(pygame.sprite.Sprite):
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
                     trex.up()
-            elif event.type == KEYUP:
-                if event.key == K_SPACE:
-                    trex.down()
+            #elif event.type == KEYUP:
+                #if event.key == K_SPACE:
+                    #trex.down()
 
     #Update the trex's game status with regards to movement
     # and later animation (challenge)

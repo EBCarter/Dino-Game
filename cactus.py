@@ -14,10 +14,10 @@ class cactus(pygame.sprite.Sprite):
         #It must be the first line in constructor.
         super().__init__()
         #Don't forget to add rect and image attributes!
-        self_x = 850
+        self_x = 950
         self_y = ground
         self.image = CACTUS
-        self.rect = pygame.Rect(self_x, self_y, 35, 25)
+        self.rect = pygame.Rect(self_x, self_y, 350, 250)
 
     #Changes the cactus's horizontal location
     def move(self):
@@ -29,6 +29,5 @@ class cactus(pygame.sprite.Sprite):
     def update(self):
         if self.rect.x <= -150:
             self.kill()
-            return "dead"
         elif self.rect.x >= -149:
             self.move()

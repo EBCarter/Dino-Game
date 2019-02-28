@@ -24,6 +24,7 @@ WHITE = (250, 250, 250)
 #Adds a new cactus sprite to the list of obstacles
 enemy = pygame.sprite.Group()
 def add_cacti():
+    CACTUS = cactus(300)
     enemy.add(CACTUS)
 
 #Updates each cactus sprite's location
@@ -31,10 +32,12 @@ def add_cacti():
 #Scores removed cacti
 #Redraws cactus image
 def update_cacti():
-    if cactus.update(CACTUS) == "dead":
-        add_cacti()
-    DISPLAYSURF.blit(cactus_character, (850, 250))
-    #cactus.move(CACTUS)
+    #CACTUS.update()
+    for CACTUS in enemy:
+        CACTUS.image = pygame.transform.scale(CACTUS.image,(300, 250))
+        CACTUS.update()
+        DISPLAYSURF.blit(CACTUS.image,CACTUS.rect)
+        #CACTUS.move()
 
 #Updates trex sprite's location and redraws trex image
 #def update_rex():
@@ -65,7 +68,7 @@ def update_cacti():
     #FPS += 5
 
 LAPRAS = trex(300)
-CACTUS = cactus(250)
+x = 0
 
 #Main game loop
 while True:
@@ -74,12 +77,9 @@ while True:
 
     lapras_character = LAPRAS.image
     lapras_rect = LAPRAS.rect
-    cactus_character = CACTUS.image
-    cactus_rect = CACTUS.rect
     lapras_character = pygame.transform.scale(lapras_character,(192, 192))
-    cactus_character = pygame.transform.scale(cactus_character,(300, 300))
     DISPLAYSURF.blit(lapras_character, lapras_rect)
-    DISPLAYSURF.blit(cactus_character, cactus_rect)
+    #DISPLAYSURF.blit(cactus_character, cactus_rect)
 
     #Event loop
     for event in pygame.event.get():
@@ -88,21 +88,20 @@ while True:
             if event.key == K_SPACE:
                 LAPRAS.up()
 
-        elif event.type == KEYUP:
-            if event.key == K_SPACE:
-                LAPRAS.down()
+        #elif event.type == KEYUP:
+            #if event.key == K_SPACE:
+                #LAPRAS.down()
 
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
     #Add cacti for lapras to jump over and spawn them
-    #add_cacti()
-    #DISPLAYSURF.blit(cactus_character, cactus_rect)
-    #cactus.move(CACTUS)
+    if x == 60:
+        add_cacti()
+        x = 0
     update_cacti()
-    #for x in range(len(enemy)):
-        #DISPLAYSURF.blit(cactus_character, cactus_rect)
+    x += 1
 
     #Update display
     pygame.display.update()
