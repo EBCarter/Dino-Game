@@ -67,7 +67,8 @@ def update_cacti():
 
     #FPS += 5
 
-LAPRAS = trex(300)
+LAPRAS = trex(320)
+CACTUS = cactus(300)
 x = 0
 
 #Main game loop
@@ -88,16 +89,18 @@ while True:
             if event.key == K_SPACE:
                 LAPRAS.up()
 
-        #elif event.type == KEYUP:
-            #if event.key == K_SPACE:
-                #LAPRAS.down()
+        elif event.type == KEYUP:
+            if event.key == K_SPACE:
+                LAPRAS.down()
 
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
+        if pygame.sprite.spritecollideany(LAPRAS, enemy):
+            LAPRAS.up()
     #Add cacti for lapras to jump over and spawn them
-    if x == 60:
+    if x == 120:
         add_cacti()
         x = 0
     update_cacti()
