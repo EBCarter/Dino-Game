@@ -24,7 +24,7 @@ WHITE = (250, 250, 250)
 #Adds a new cactus sprite to the list of obstacles
 enemy = pygame.sprite.Group()
 def add_cacti():
-    CACTUS = cactus(300)
+    CACTUS = cactus(400)
     enemy.add(CACTUS)
 
 #Updates each cactus sprite's location
@@ -34,7 +34,7 @@ def add_cacti():
 def update_cacti():
     #CACTUS.update()
     for CACTUS in enemy:
-        CACTUS.image = pygame.transform.scale(CACTUS.image,(300, 250))
+        CACTUS.image = pygame.transform.scale(CACTUS.image,(50, 62))
         CACTUS.update()
         DISPLAYSURF.blit(CACTUS.image,CACTUS.rect)
         #CACTUS.move()
@@ -67,8 +67,8 @@ def update_cacti():
 
     #FPS += 5
 
-LAPRAS = trex(320)
-CACTUS = cactus(300)
+LAPRAS = trex(360)
+CACTUS = cactus(360)
 x = 0
 
 #Main game loop
@@ -78,7 +78,7 @@ while True:
 
     lapras_character = LAPRAS.image
     lapras_rect = LAPRAS.rect
-    lapras_character = pygame.transform.scale(lapras_character,(192, 192))
+    lapras_character = pygame.transform.scale(lapras_character,(100, 90))
     DISPLAYSURF.blit(lapras_character, lapras_rect)
     #DISPLAYSURF.blit(cactus_character, cactus_rect)
 
@@ -97,14 +97,16 @@ while True:
             pygame.quit()
             sys.exit()
 
-        if pygame.sprite.spritecollideany(LAPRAS, enemy):
-            LAPRAS.up()
     #Add cacti for lapras to jump over and spawn them
     if x == 120:
         add_cacti()
         x = 0
     update_cacti()
     x += 1
+
+    if pygame.sprite.spritecollideany(LAPRAS, enemy):
+        pygame.quit()
+        sys.exit()
 
     #Update display
     pygame.display.update()

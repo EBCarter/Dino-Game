@@ -17,7 +17,7 @@ class cactus(pygame.sprite.Sprite):
         self_x = 950
         self_y = ground
         self.image = CACTUS
-        self.rect = pygame.Rect(self_x, self_y, 350, 250)
+        self.rect = pygame.Rect(self_x, self_y, 50, 62)
 
     #Changes the cactus's horizontal location
     def move(self):
