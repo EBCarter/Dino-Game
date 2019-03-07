@@ -15,7 +15,26 @@ class trex(pygame.sprite.Sprite):
         self_x = 25
         self_y = ground
         self.image = LAPRAS
-        self.rect = pygame.Rect(self_x, self_y, 192, 192)
+        self.rect = pygame.Rect(self_x, self_y, 100, 50)
+        self.height_num = 0.0
+        self.UorD = 0
+
+    #makes the lapras jump up and down gradually
+    def jump(self):
+        if self.height_num <= 12.5 and self.UorD == 0 or self.height_num == 0:
+            self.rect.y = 370 - self.height_num**2
+            self.height_num += 0.5
+            self.UorD = 0
+            if self.rect.y == 201:
+                self.UorD = 1
+        elif self.height_num == 13.0 or self.UorD == 1 and self.height_num >= 0:
+            self.height_num -= 0.5
+            self.rect.y = 370 - self.height_num ** 2
+            self.UorD = 1
+            if self.rect.y == 370:
+                UorD = 0
+        elif self.rect.y == 370:
+            self.height_num = 0
 
     #Change the trex's vertical position to above the ground
     def up(self):

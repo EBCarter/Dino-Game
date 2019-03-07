@@ -17,7 +17,7 @@ class cactus(pygame.sprite.Sprite):
         self_x = 950
         self_y = ground
         self.image = CACTUS
-        self.rect = pygame.Rect(self_x, self_y, 50, 62)
+        self.rect = pygame.Rect(self_x, self_y, 50, 40)
 
     #Changes the cactus's horizontal location
     def move(self):
@@ -26,8 +26,11 @@ class cactus(pygame.sprite.Sprite):
     #Updates the cactus's horizonal location.
     #If it's in the window, it will move.
     #If it's outside the window, the sprite will be killed.
-    def update(self):
+    def update(self, score):
         if self.rect.x <= -150:
             self.kill()
+            print(score)
+            return score + 1
         elif self.rect.x >= -149:
             self.move()
+        return score

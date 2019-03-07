@@ -20,6 +20,7 @@ pygame.display.set_caption("Lapras Jump")
 
 #Sets background color
 WHITE = (250, 250, 250)
+BLUE = (0,0,250)
 
 #Adds a new cactus sprite to the list of obstacles
 enemy = pygame.sprite.Group()
@@ -35,7 +36,8 @@ def update_cacti():
     #CACTUS.update()
     for CACTUS in enemy:
         CACTUS.image = pygame.transform.scale(CACTUS.image,(50, 62))
-        CACTUS.update()
+        global score
+        score = CACTUS.update(score)
         DISPLAYSURF.blit(CACTUS.image,CACTUS.rect)
         #CACTUS.move()
 
@@ -67,14 +69,21 @@ def update_cacti():
 
     #FPS += 5
 
-LAPRAS = trex(360)
+LAPRAS = trex(370)
 CACTUS = cactus(360)
 x = 0
+score = 0
+BASICFONT = pygame.font.Font('freesansbold.ttf',16)
+Surf = BASICFONT.render('Score:' + str(score),1,(0,0,0))
+Rect = Surf.get_rect()
+Rect.topleft = (10,10)
+top_time = 0
+spawn_it = 120
 
 #Main game loop
 while True:
     #Fill in background
-    DISPLAYSURF.fill(WHITE)
+    DISPLAYSURF.fill(BLUE)
 
     lapras_character = LAPRAS.image
     lapras_rect = LAPRAS.rect
@@ -86,27 +95,45 @@ while True:
     for event in pygame.event.get():
 
         if event.type == KEYDOWN:
-            if event.key == K_SPACE:
-                LAPRAS.up()
+            if event.key == K_SPACE and top_time == 0:
+                LAPRAS.jump()
 
-        elif event.type == KEYUP:
-            if event.key == K_SPACE:
-                LAPRAS.down()
+        #elif event.type == KEYUP:
+            #if event.key == K_SPACE:
+                #LAPRAS.down()
+
+
 
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
     #Add cacti for lapras to jump over and spawn them
-    if x == 120:
+    if x == spawn_it:
         add_cacti()
         x = 0
-    update_cacti()
+        spawn_it = random.randint(70,120)
+    #update_cacti()
     x += 1
+    #global score
+    update_cacti()
+
+    if LAPRAS.height_num == 13:
+        top_time += 1
+        if top_time == 20:
+            LAPRAS.jump()
+            top_time = 0
+    elif LAPRAS.height_num != 13 and LAPRAS.height_num != 0:
+        LAPRAS.jump()
 
     if pygame.sprite.spritecollideany(LAPRAS, enemy):
         pygame.quit()
         sys.exit()
+
+    Surf = BASICFONT.render('Score:' + str(score),1,(0,0,0))
+    Rect = Surf.get_rect()
+    Rect.topleft = (10,10)
+    DISPLAYSURF.blit(Surf, Rect)
 
     #Update display
     pygame.display.update()
