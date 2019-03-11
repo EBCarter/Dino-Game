@@ -6,6 +6,7 @@ from cactus import cactus
 
 #i added this for the lapras Image
 lapras_image = pygame.image.load('lapras-pixilart.png')
+background = pygame.image.load('background.png')
 
 #Always call before utilizing pygame functions
 pygame.init()
@@ -108,11 +109,37 @@ while True:
             pygame.quit()
             sys.exit()
 
-    #Add cacti for lapras to jump over and spawn them
-    if x == spawn_it:
-        add_cacti()
-        x = 0
-        spawn_it = random.randint(70,120)
+    #Add cacti for lapras to jump over and spawn them and changes speed if you progress far enough
+    if score <= 9:
+        if x == spawn_it:
+            add_cacti()
+            x = 0
+            spawn_it = random.randint(70,120)
+    elif score <= 14:
+        if x == spawn_it:
+            add_cacti()
+            x = 0
+            spawn_it = random.randint(65,110)
+    elif score <= 19:
+        if x == spawn_it:
+            add_cacti()
+            x = 0
+            spawn_it = random.randint(60,100)
+    elif score <= 24:
+        if x == spawn_it:
+            add_cacti()
+            x = 0
+            spawn_it = random.randint(55,90)
+    elif score <= 29:
+        if x == spawn_it:
+            add_cacti()
+            x = 0
+            spawn_it = random.randint(50,80)
+    elif score >= 30:
+        if x == spawn_it:
+            add_cacti()
+            x = 0
+            spawn_it = random.randint(45,70)
     #update_cacti()
     x += 1
     #global score
@@ -120,7 +147,7 @@ while True:
 
     if LAPRAS.height_num == 13:
         top_time += 1
-        if top_time == 20:
+        if top_time == 10:
             LAPRAS.jump()
             top_time = 0
     elif LAPRAS.height_num != 13 and LAPRAS.height_num != 0:
