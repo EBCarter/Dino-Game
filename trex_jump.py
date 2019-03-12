@@ -84,12 +84,18 @@ spawn_it = 120
 #Main game loop
 while True:
     #Fill in background
-    DISPLAYSURF.fill(BLUE)
+    #DISPLAYSURF.fill(BLUE)
 
     lapras_character = LAPRAS.image
     lapras_rect = LAPRAS.rect
     lapras_character = pygame.transform.scale(lapras_character,(100, 90))
+    background = pygame.transform.scale(background,(1000,500))
+    #makes the background a thing
+    DISPLAYSURF.blit(background,(0,0))
+
+    #draws the lapras
     DISPLAYSURF.blit(lapras_character, lapras_rect)
+    
     #DISPLAYSURF.blit(cactus_character, cactus_rect)
 
     #Event loop
